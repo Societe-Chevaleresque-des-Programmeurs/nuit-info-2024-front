@@ -1,0 +1,17 @@
+.interactive-content {
+  height: calc(100vh - 2rem);
+  overflow: hidden;
+  padding: 1rem;
+
+  img {
+    display: block;
+    height: 100%;
+    width: auto;
+    margin: auto;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
