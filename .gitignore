@@ -1,1 +1,3 @@
 !*.png
+flake.nix
+flake.lock
