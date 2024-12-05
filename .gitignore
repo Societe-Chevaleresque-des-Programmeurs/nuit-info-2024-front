@@ -1,3 +1,2 @@
 !*.png
-flake.nix
-flake.lock
+!*.svg
