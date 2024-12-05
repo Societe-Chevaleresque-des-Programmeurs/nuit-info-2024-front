@@ -1,14 +1,29 @@
 .interactive-content {
-  height: calc(100vh - 2rem);
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  /* align-items: center; */
+  height: calc(100vh - 1rem);
   overflow: hidden;
-  padding: 1rem;
+  padding: .5rem;
+}
 
-  img {
-    display: block;
-    height: 100%;
-    width: auto;
-    margin: auto;
-  }
+.ocean-organs {
+  flex: 1;
+}
+
+.body-container {
+  flex: 3;
+  height: auto;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 body {
