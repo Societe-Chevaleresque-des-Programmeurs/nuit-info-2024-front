@@ -78,6 +78,8 @@
         function startProgress() {
             width = 0; // Réinitialise la barre si elle est pleine
             progressBar.style.width = '0%';
+            poisson.src = 'colin.jpeg';
+            poisson.style.visibility = 'hidden';
             statusMessage.textContent = `Cliquez et maintenez pour remplir la barre.`;
             progressBar.style.background ="linear-gradient(to right, #4caf50, #81c784)";
             const speed = Math.random() * (80 - 10) + 10; // Vitesse aléatoire (10 ms à 50 ms)
@@ -98,11 +100,14 @@
                 statusMessage.textContent = `Undercooked`;
             }else if(width > 110){
                 statusMessage.textContent = `Overcooked`;
+                poisson.src = 'coal.webp';
             }else{
                 increment++;
                 incre.textContent =increment;
+                poisson.src = 'pane.jpeg';
                 statusMessage.textContent = `Welldone`;
             }
+            poisson.style.visibility = 'visible';
         }
 
         const progressContainer = document.getElementById('progressContainer');
