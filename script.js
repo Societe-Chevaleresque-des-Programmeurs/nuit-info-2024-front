@@ -1,6 +1,5 @@
 function listenMapAreas(mapName) {
   const map = document.querySelector('map[name=' + mapName + ']');
-  // map.removeEventListener('click');
   const areas = map.querySelectorAll('area');
   areas.forEach(a => {
     a.addEventListener('click', event => {
@@ -12,7 +11,5 @@ function listenMapAreas(mapName) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // const body = document.querySelector(".body-container img");
-  // body.removeEventListener('click');
-  // listenMapAreas('organs');
+  listenMapAreas('organs');
 });
