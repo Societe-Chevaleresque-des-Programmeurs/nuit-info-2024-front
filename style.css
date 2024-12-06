@@ -12,6 +12,10 @@
 .ocean-organs {
   flex: 1;
   max-height: 20rem;
+
+  img {
+    display: none;
+  }
 }
 
 .body-container {
