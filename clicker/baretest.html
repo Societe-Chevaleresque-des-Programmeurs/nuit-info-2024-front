@@ -1,125 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barre de progression au clic maintenu</title>
-    <style>
-        .fish{
-            position:relative;
-            animation:mymove 3s ease-out forwards;
-            animation-iteration-count:3;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barre de progression au clic maintenu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
 
-            /* Safari and Chrome */
-            -webkit-animation:mymove 3s;
-            -webkit-animation-iteration-count:3;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
+    .fish {
+      position: relative;
+      animation: mymove 3s ease-out forwards;
+      animation-iteration-count: 3;
+    }
 
-        .progress-container {
-            width: 80%;
-            height: 30px;
-            background-color: #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-        }
+    .progress-container {
+      width: 80%;
+      height: 30px;
+      background-color: #e0e0e0;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+    }
 
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(to right, #4caf50, #81c784);
-            transition: width 0.1s linear;
-        }
-        @keyframes mymove
-            { from {top:0px; opacity: 0;}
-            to {top:200px; opacity: 1}
-            }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(to right, #4caf50, #81c784);
+      transition: width 0.1s linear;
+    }
 
-            @-webkit-keyframes mymove /* Safari and Chrome */
-            {
-                from {top:0px; opacity: 0;}
-                to {top:200px; opacity: 1;}
-            }
-    </style>
+    @keyframes mymove {
+      from {
+        top: 0px;
+        opacity: 0;
+      }
+
+      to {
+        top: 200px;
+        opacity: 1
+      }
+    }
+  </style>
 </head>
+
 <body>
-    
-    <p id="incre">0</p>
-    <img src="colin.jpeg" id="fish">
-    <img src="friteuse.jpeg" id="frits">
-    
-    
-    <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <p id="statusMessage">Cliquez et maintenez pour remplir la barre.</p>
 
-    <script>
-        let increment = 0;
-        const progressBar = document.getElementById('progressBar');
-        const statusMessage = document.getElementById('statusMessage');
-        const incre = document.getElementById('incre');
-        const poisson = document.getElementById("fish")
-        let width = 0;
-        let intervalId = null;
-        let stoped = false;
+  <p id="incre">0</p>
+  <img src="colin.jpeg" id="fish">
+  <img src="friteuse.jpeg" id="frits">
 
-        function startProgress() {
-            width = 0; // Réinitialise la barre si elle est pleine
-            progressBar.style.width = '0%';
-            poisson.src = 'colin.jpeg';
-            poisson.style.visibility = 'hidden';
-            statusMessage.textContent = `Cliquez et maintenez pour remplir la barre.`;
-            progressBar.style.background ="linear-gradient(to right, #4caf50, #81c784)";
-            const speed = Math.random() * (80 - 10) + 10; // Vitesse aléatoire (10 ms à 50 ms)
-            statusMessage.textContent = `Vitesse : ${speed.toFixed(1)} ms par incrément.`;
-            intervalId = setInterval(() => {
-                width += 1; // Augmente la largeur de 1%
-                progressBar.style.width = width + '%';
-                if(width > 110){
-                    progressBar.style.background ="linear-gradient(to right, #4caf50, red)";
-                }
-  
-            }, speed);
-        }
 
-        function stopProgress() {
-            clearInterval(intervalId); // Arrête l'animation
-            if(width < 90){
-                statusMessage.textContent = `Undercooked`;
-            }else if(width > 110){
-                statusMessage.textContent = `Overcooked`;
-                poisson.src = 'coal.webp';
-            }else{
-                increment++;
-                incre.textContent =increment;
-                poisson.src = 'pane.jpeg';
-                statusMessage.textContent = `Welldone`;
-            }
-            poisson.style.visibility = 'visible';
-        }
+  <div class="progress-container" id="progressContainer">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <p id="statusMessage">Cliquez et maintenez pour remplir la barre.</p>
 
-        const progressContainer = document.getElementById('progressContainer');
+  <script>
+    m
+    const progress    cument.getElementById('progressBar');
+    const statusMessag    ment.getElementById('statusMessage');
+    const incre = document    entById('incre');
+    const poisson = document.g    tById("fish")
+    let width = 0;
+    let interva    ll;
+    let sto    lse;
 
-        // Écouteur pour commencer le remplissage au clic maintenu
-        document.addEventListener('mousedown', startProgress);
+    function star    s() {
+      width = 0    nitialise la barre si elle            progressBar.style.width = '0%';
+      poisson.src       g';
+      poisson.style.visibili      ';
+      statusMessage.textC      iquez et maintenez pour remplir la ba       progressBar.style.background = "linear-gradient(to right, #4caf50, #81c784      nst speed = Math.random() * (8 0 - 10) + 10; // Vitesse aléatoire (10 ms à 50       atusMessage.textContent = `Vitesse : ${speed.toFixed(1)} ms par incrément.`;
+      setInterval(() => {
+        width += 1; // Augmente la largeur de 1%
+        p      tyle.width = width + '%';
+               ) {
+        progressBar.style.backgroun        ient(to right, #4caf50, red)";
+        d);
+      }
 
-        // Écouteur pour arrêter le remplissage au relâchement
-        document.addEventListener('mouseup', stopProgress);
+      fu          ) {
+        clearInterval(interv alId); // Arrête l'animation
+        if (widt          a      extContent     coo
+      } else if (width > 110      statusMessage.textContent = `Overcooked`;
+              =  'coal.webp';
+      increment++;
+      incre.textConte      n t;
+      poisson.s rc                statusMessage.textContent = `Welld            poisson.style.visibilit      ' ;
+             gressContaine        ElementById('progre ssContainer        teur pour commencer le remp        maintenu
+    document.addEventListener('      st      ;
 
-        // Optionnel : arrête également si la souris sort du conteneur
-        document.addEventListener('mouseleave', stopProgress);
-    </script>
+    // Écouteur pour arrêter le rem     au    ment
+    document.addEventListener('mouseup', stopProgress);
+
+    // Opti    arrête également si la souris sort du conteneur
+    documen    ntListener('mouseleave', stopProgress);
+  </script>
 </body>
+
 </html>
