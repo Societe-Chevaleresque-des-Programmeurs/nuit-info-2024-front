@@ -153,16 +153,13 @@ function listenMapAreas(mapName) {
   const areas = map.querySelectorAll('area')
   areas.forEach(a => {
     a.addEventListener('click', event => {
-      event.preventDefault()
+      // event.preventDefault()
       const title = event.target.getAttribute('title')
       console.log('Opening organ: ' + title)
       const organSection = document.querySelector('.ocean-organs')
       switch (title) {
         case 'bone':
           showBone(organSection)
-          break
-        case 'brain':
-          showBelly(organSection)
           break
         case 'heart':
           showHeart(organSection)
