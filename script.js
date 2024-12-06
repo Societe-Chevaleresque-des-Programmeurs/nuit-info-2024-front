@@ -2,7 +2,7 @@ let fishCooker = {
   increment: 0,
   width: 0,
   intervalId: null,
-  stoped: false,
+  running: false,
   cooking: -1,
 }
 
@@ -20,6 +20,8 @@ function showBone(section) {
 }
 
 function startProgress() {
+  if (fishCooker.running) return stopProgress()
+  fishCooker.running = true
   fishCooker.width = 0; // Réinitialise la barre si elle est pleine
   fishCooker.progressBar.style.width = '0%';
   fishCooker.fish.src = 'clicker/fish.webp';
@@ -37,6 +39,7 @@ function startProgress() {
 
 function stopProgress() {
   clearInterval(fishCooker.intervalId); // Arrête l'animation
+  fishCooker.running = false
   if (fishCooker.width < 90) {
     fishCooker.cooking = -1;
   } else if (fishCooker.width > 110) {
@@ -77,9 +80,9 @@ function showBrain(section) { // Cookie clicker captcha
   fishCooker.fish = fish
   fishCooker.progressBar = progressBar
 
-  progressContain.addEventListener('mousedown', startProgress);
-  progressContain.addEventListener('mouseup', stopProgress);
-  progressContain.addEventListener('mouseleave', stopProgress);
+  progressContain.addEventListener('click', startProgress);
+  // progressContain.addEventListener('mouseup', stopProgress);
+  // progressContain.addEventListener('mouseleave', stopProgress);
 }
 
 function showHeart(section) {
