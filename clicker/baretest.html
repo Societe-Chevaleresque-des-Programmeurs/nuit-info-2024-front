@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barre de progression au clic maintenu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .progress-container {
+            width: 80%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, #4caf50, #81c784);
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    
+    <p id="incre">0</p>
+    
+    
+    
+    
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p id="statusMessage">Cliquez et maintenez pour remplir la barre.</p>
+
+    <script>
+        let increment = 0;
+        const progressBar = document.getElementById('progressBar');
+        const statusMessage = document.getElementById('statusMessage');
+        const incre = document.getElementById('incre');
+        let width = 0;
+        let intervalId = null;
+        let stoped = false;
+
+        function startProgress() {
+            width = 0; // Réinitialise la barre si elle est pleine
+            progressBar.style.width = '0%';
+            statusMessage.textContent = `Cliquez et maintenez pour remplir la barre.`;
+            progressBar.style.background ="linear-gradient(to right, #4caf50, #81c784)";
+            const speed = Math.random() * (50 - 10) + 10; // Vitesse aléatoire (10 ms à 50 ms)
+            statusMessage.textContent = `Vitesse : ${speed.toFixed(1)} ms par incrément.`;
+            intervalId = setInterval(() => {
+                width += 1; // Augmente la largeur de 1%
+                progressBar.style.width = width + '%';
+                if(width > 110){
+                    progressBar.style.background ="linear-gradient(to right, #4caf50, red)";
+                }
+  
+            }, speed);
+        }
+
+        function stopProgress() {
+            clearInterval(intervalId); // Arrête l'animation
+            if(width < 90){
+                statusMessage.textContent = `Undercooked`;
+            }else if(width > 110){
+                statusMessage.textContent = `Overcooked`;
+            }else{
+                increment++;
+                incre.textContent =increment;
+                statusMessage.textContent = `Welldone`;
+            }
+        }
+
+        const progressContainer = document.getElementById('progressContainer');
+
+        // Écouteur pour commencer le remplissage au clic maintenu
+        progressContainer.addEventListener('mousedown', startProgress);
+
+        // Écouteur pour arrêter le remplissage au relâchement
+        document.addEventListener('mouseup', stopProgress);
+
+        // Optionnel : arrête également si la souris sort du conteneur
+        document.addEventListener('mouseleave', stopProgress);
+    </script>
+</body>
+</html>

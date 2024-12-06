@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur de clic</title>
+    <style>
+        #button {
+            display: inline-block;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .progress-container {
+            width: 80%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, #4caaa0, #81aa8c);
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <div id="button">Cliquez-moi</div>
+    <p id="result"></p>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script>
+        
+        const button = document.getElementById('button');
+        const result = document.getElementById('result');
+        let temps = 0;
+        let startTime = 0; // Temps de début
+        let endTime = 0;   // Temps de fin
+        const progressBar = document.getElementById('progressBar');
+        let width = 0;
+        
+
+        // Événement déclenché au début du clic
+        button.addEventListener('mousedown', () => {
+            progressBar.style.width = 0 + '%';
+            temps = Math.random() * (20 - 1) + 1;
+            animateProgressBar();
+            startTime = performance.now(); // Enregistre l'heure de début
+        });
+
+        // Événement déclenché à la fin du clic
+        button.addEventListener('mouseup', () => {
+            endTime = performance.now(); // Enregistre l'heure de fin
+            const duration = (endTime - startTime).toFixed(2); // Calcul de la durée en millisecondes
+            result.textContent = `Durée du clic maintenu : ${duration} ms`;
+            
+        });
+
+        // Optionnel : Gestion du cas où le clic est relâché hors du bouton
+        document.addEventListener('mouseup', () => {
+            if (startTime !== 0 && endTime === 0) {
+                endTime = performance.now();
+                const duration = (endTime - startTime).toFixed(2);
+                result.textContent = `Durée du clic maintenu : ${duration} ms`;
+            }
+        });
+        
+
+
+        function animateProgressBar() {
+            width += 0.05*temps; // Incrémente la largeur
+            if (width > 100000) {
+                //width = 0; // Réinitialise si dépasse 100%
+            }
+            progressBar.style.width = width + '%'; // Met à jour la largeur
+            requestAnimationFrame(animateProgressBar); // Continue l'animation
+        }
+
+        // Démarrer l'animation
+        
+        
+        
+    </script>
+</body>
+</html>
