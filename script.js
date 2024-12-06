@@ -54,7 +54,7 @@ function stopProgress() {
   fishCooker.fish.classList = '';
 }
 
-function showBrain(section) { // Cookie clicker captcha
+function showBelly(section) { // Cookie clicker captcha
   section.innerHTML = '' // Clear the current content
 
   const title = document.createElement('h3')
@@ -81,8 +81,6 @@ function showBrain(section) { // Cookie clicker captcha
   fishCooker.progressBar = progressBar
 
   progressContain.addEventListener('click', startProgress);
-  // progressContain.addEventListener('mouseup', stopProgress);
-  // progressContain.addEventListener('mouseleave', stopProgress);
 }
 
 function showHeart(section) {
@@ -164,7 +162,7 @@ function listenMapAreas(mapName) {
           showBone(organSection)
           break
         case 'brain':
-          showBrain(organSection)
+          showBelly(organSection)
           break
         case 'heart':
           showHeart(organSection)
@@ -177,6 +175,9 @@ function listenMapAreas(mapName) {
           break
         case 'lungs':
           showLungs(organSection)
+          break
+        case 'belly':
+          showBelly(organSection)
           break
         case 'tumor':
           showTumor(organSection)
