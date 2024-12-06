@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barre de progression au clic maintenu</title>
     <style>
+        .fish{
+            position:relative;
+            animation:mymove 3s ease-out forwards;
+            animation-iteration-count:3;
+
+            /* Safari and Chrome */
+            -webkit-animation:mymove 3s;
+            -webkit-animation-iteration-count:3;
+        }
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -32,13 +41,23 @@
             background: linear-gradient(to right, #4caf50, #81c784);
             transition: width 0.1s linear;
         }
+        @keyframes mymove
+            { from {top:0px; opacity: 0;}
+            to {top:200px; opacity: 1}
+            }
+
+            @-webkit-keyframes mymove /* Safari and Chrome */
+            {
+                from {top:0px; opacity: 0;}
+                to {top:200px; opacity: 1;}
+            }
     </style>
 </head>
 <body>
     
     <p id="incre">0</p>
-    
-    
+    <img src="colin.jpeg" id="fish">
+    <img src="friteuse.jpeg" id="frits">
     
     
     <div class="progress-container" id="progressContainer">
@@ -51,6 +70,7 @@
         const progressBar = document.getElementById('progressBar');
         const statusMessage = document.getElementById('statusMessage');
         const incre = document.getElementById('incre');
+        const poisson = document.getElementById("fish")
         let width = 0;
         let intervalId = null;
         let stoped = false;
@@ -60,7 +80,7 @@
             progressBar.style.width = '0%';
             statusMessage.textContent = `Cliquez et maintenez pour remplir la barre.`;
             progressBar.style.background ="linear-gradient(to right, #4caf50, #81c784)";
-            const speed = Math.random() * (50 - 10) + 10; // Vitesse aléatoire (10 ms à 50 ms)
+            const speed = Math.random() * (80 - 10) + 10; // Vitesse aléatoire (10 ms à 50 ms)
             statusMessage.textContent = `Vitesse : ${speed.toFixed(1)} ms par incrément.`;
             intervalId = setInterval(() => {
                 width += 1; // Augmente la largeur de 1%
@@ -88,7 +108,7 @@
         const progressContainer = document.getElementById('progressContainer');
 
         // Écouteur pour commencer le remplissage au clic maintenu
-        progressContainer.addEventListener('mousedown', startProgress);
+        document.addEventListener('mousedown', startProgress);
 
         // Écouteur pour arrêter le remplissage au relâchement
         document.addEventListener('mouseup', stopProgress);
